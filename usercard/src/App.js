@@ -23,19 +23,22 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.login.toLowerCase() !== this.state.searched.toLowerCase()) {
-      console.log('testing state', 'aftersearch')
-      fetch(`https://api.github.com/users/${this.state.searched}`)
-      .then((res) => res.json())
-      .then((user) => this.setState(user))                                          
-      .catch((err) => console.log(err));
-
-      fetch(`https://api.github.com/users/${this.state.searched}/followers`)
-      .then((res) => res.json())
-      .then((user) => this.setState({ followers: user }))
-      .catch((err) => console.log(err));
+    if(this.state.login !== undefined){
+      if (this.state.login.toLowerCase() !== this.state.searched.toLowerCase() && this.state.message !== "Not Found") {
+        console.log('testing state', 'aftersearch')
+        fetch(`https://api.github.com/users/${this.state.searched}`)
+        .then((res) => res.json())
+        .then((user) => this.setState(user))                                          
+        .catch((err) => console.log(err));
+  
+        fetch(`https://api.github.com/users/${this.state.searched}/followers`)
+        .then((res) => res.json())
+        .then((user) => this.setState({ followers: user }))
+        .catch((err) => console.log(err));
+      }
     }
-  }
+    }
+
 
   handleChange(e) {
     this.setState({ userSearch: e.target.value });
@@ -44,7 +47,7 @@ class App extends Component {
   handleUserSubmit(e) {
     e.preventDefault()
     this.setState({ searched: this.state.userSearch });
-    this.setState({ userSearch: ''})
+    this.setState({ userSearch: '', message: ''})
   }
 
   render() {

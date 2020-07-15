@@ -6,6 +6,7 @@ import {
   CardContent,
   Typography,
 } from "@material-ui/core";
+// import Theme from '../Theme'
 
 const useStyles = makeStyles({
   root: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles({
 const UserCard = ({ user }) => {
 //   console.log("bs: UserCard.js: props passed", user);
   const classes = useStyles();
+
   return (
     <>
       <Card className={classes.root} raised children={CardMedia}>
@@ -34,7 +36,7 @@ const UserCard = ({ user }) => {
           title="avatar"
         />
         <CardContent>
-          <Typography variant="h5" component="p">
+          <Typography  variant="h5" component="p">
             {user.login}
           </Typography>
           <Typography component="p">Name: {user.name}</Typography>
